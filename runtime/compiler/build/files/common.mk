@@ -233,6 +233,7 @@ JIT_PRODUCT_BACKEND_SOURCES+=\
     omr/compiler/optimizer/VPConstraint.cpp \
     omr/compiler/optimizer/VPHandlers.cpp \
     omr/compiler/optimizer/VPHandlersCommon.cpp \
+    omr/compiler/optimizer/BridgeTest.cpp \
     omr/compiler/ras/CallStack.cpp \
     omr/compiler/ras/CFGChecker.cpp \
     omr/compiler/ras/Debug.cpp \

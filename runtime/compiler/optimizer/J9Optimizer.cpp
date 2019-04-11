@@ -39,6 +39,7 @@
 #include "control/Recompilation.hpp"
 #include "control/RecompilationInfo.hpp"
 #include "il/symbol/ResolvedMethodSymbol.hpp"
+#include "optimizer/BridgeTest.hpp"
 #include "optimizer/AllocationSinking.hpp"
 #include "optimizer/IdiomRecognition.hpp"
 #include "optimizer/Inliner.hpp"
@@ -249,6 +250,7 @@ static const OptimizationStrategy coldStrategyOpts[] =
    { OMR::stringBuilderTransformer,                  OMR::IfNotQuickStart            },
    { OMR::stringPeepholes,                           OMR::IfNotQuickStart            }, // need stringpeepholes to catch bigdecimal patterns
    { OMR::trivialInlining                                                       },
+   { OMR::bridgeTest },
    { OMR::jProfilingBlock                                                       },
    { OMR::virtualGuardTailSplitter                                              },
    { OMR::recompilationModifier,                     OMR::IfEnabled                  },
@@ -737,6 +739,8 @@ J9::Optimizer::Optimizer(TR::Compilation *comp, TR::ResolvedMethodSymbol *method
    {
    // initialize additional J9 optimizations
 
+   _opts[OMR::bridgeTest] =
+      new (comp->allocator()) TR::OptimizationManager(self(), OMR::BridgeTest::create, OMR::bridgeTest);
    _opts[OMR::inlining] =
       new (comp->allocator()) TR::OptimizationManager(self(), TR_Inliner::create, OMR::inlining);
    _opts[OMR::targetedInlining] =
